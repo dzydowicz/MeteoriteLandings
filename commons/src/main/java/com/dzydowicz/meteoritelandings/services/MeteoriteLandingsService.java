@@ -2,13 +2,15 @@ package com.dzydowicz.meteoritelandings.services;
 
 import com.dzydowicz.meteoritelandings.db.repository.MeteoriteLandingsRepository;
 import com.dzydowicz.meteoritelandings.exceptions.MeteoriteLandingNotFoundException;
-import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationTO;
 import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
+import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationTO;
 import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingFilterTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +33,37 @@ public class MeteoriteLandingsService {
     }
 
     public List<MeteoriteLandingTO> getMultiMeteoriteLandings(MeteoriteLandingFilterTO meteoriteLandingFilterTO) {
-        return null;
+        Query query = new Query();
+
+        if (meteoriteLandingFilterTO.getIds() != null && !meteoriteLandingFilterTO.getIds().isEmpty()){
+            query.addCriteria(Criteria.where("id").in(meteoriteLandingFilterTO.getIds()));
+        }
+
+        if (meteoriteLandingFilterTO.getNameType() != null) {
+            query.addCriteria(Criteria.where("nametype").is(meteoriteLandingFilterTO.getNameType()));
+        }
+
+        if (meteoriteLandingFilterTO.getFall() != null) {
+            query.addCriteria(Criteria.where("nametype").is(meteoriteLandingFilterTO.getFall()));
+        }
+
+        if (meteoriteLandingFilterTO.getMinMass() != null) {
+            query.addCriteria(Criteria.where("nametype").gte(meteoriteLandingFilterTO.getMinMass()));
+        }
+
+        if (meteoriteLandingFilterTO.getMaxMass() != null) {
+            query.addCriteria(Criteria.where("nametype").lte(meteoriteLandingFilterTO.getMaxMass()));
+        }
+
+        if (meteoriteLandingFilterTO.getMinYear() != null) {
+            query.addCriteria(Criteria.where("nametype").gte(meteoriteLandingFilterTO.getMinYear()));
+        }
+
+        if (meteoriteLandingFilterTO.getMaxYear() != null) {
+            query.addCriteria(Criteria.where("nametype").lte(meteoriteLandingFilterTO.getMaxYear()));
+        }
+
+        return repository.findAll(query);
     }
 
     public MeteoriteLandingTO updateMeteoriteLanding(int meteoriteLandingId, MeteoriteLandingCreationTO meteoriteLandingCreationTO) throws MeteoriteLandingNotFoundException {

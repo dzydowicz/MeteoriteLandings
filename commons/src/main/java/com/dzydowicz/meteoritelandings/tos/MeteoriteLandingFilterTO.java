@@ -13,8 +13,8 @@ public class MeteoriteLandingFilterTO {
     private List<Integer> ids;
     private MeteoriteLandingNameTypeEnum nameType;
     private MeteoriteLandingFallEnum fall;
-    private float minMass;
-    private float maxMass;
-    private float minYear;
-    private float maxYear;
+    private Float minMass;
+    private Float maxMass;
+    private Float minYear;
+    private Float maxYear;
 }

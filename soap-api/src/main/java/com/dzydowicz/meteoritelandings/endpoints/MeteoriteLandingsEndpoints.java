@@ -4,13 +4,17 @@ import com.dzydowicz.meteoritelandings.converters.SOAPMeteoriteLandingTOsConvert
 import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.services.MeteoriteLandingsService;
 import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationTO;
+import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingUpdateTO;
 import com.dzydowicz.meteoritelandings.tos.SOAPMeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.tos.request.GetMeteoriteLandingRequest;
 import com.dzydowicz.meteoritelandings.tos.request.create.CreateMeteoriteLandingsRequest;
 import com.dzydowicz.meteoritelandings.tos.request.create.MultiCreateMeteoriteLandingRequest;
+import com.dzydowicz.meteoritelandings.tos.request.update.SOAPMeteoriteLandingUpdateRequestTO;
+import com.dzydowicz.meteoritelandings.tos.request.update.UpdateMeteoriteLandingRequest;
 import com.dzydowicz.meteoritelandings.tos.response.create.CreateMeteoriteLandingResponse;
 import com.dzydowicz.meteoritelandings.tos.response.GetMeteoriteLandingResponse;
 import com.dzydowicz.meteoritelandings.tos.response.create.MultiCreateMeteoriteLandingsResponse;
+import com.dzydowicz.meteoritelandings.tos.response.update.UpdateMeteoriteLandingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -71,6 +75,24 @@ public class MeteoriteLandingsEndpoints {
 
         MultiCreateMeteoriteLandingsResponse response = new MultiCreateMeteoriteLandingsResponse();
         response.setMeteoriteLanding(soapMeteoriteLandingTOs);
+
+        return response;
+    }
+
+    @PayloadRoot(localPart = "updateMeteoriteLandingRequest")
+    @ResponsePayload
+    public UpdateMeteoriteLandingResponse updateMeteoriteLandingResponse(@RequestPayload UpdateMeteoriteLandingRequest request) {
+
+        SOAPMeteoriteLandingUpdateRequestTO soapMeteoriteLandingUpdateTO = request.getMeteoriteLanding();
+        Integer id = soapMeteoriteLandingUpdateTO.getId();
+
+        MeteoriteLandingUpdateTO meteoriteLandingUpdateTO = SOAPMeteoriteLandingTOsConverter.convertToMeteoriteLandingUpdateTO(soapMeteoriteLandingUpdateTO);
+
+        MeteoriteLandingTO meteoriteLandingTO = meteoriteLandingsService.updateMeteoriteLanding(id, meteoriteLandingUpdateTO);
+        SOAPMeteoriteLandingTO soapMeteoriteLandingTO = SOAPMeteoriteLandingTOsConverter.convertToSOAPMeteoriteLandingTO(meteoriteLandingTO);
+
+        UpdateMeteoriteLandingResponse response = new UpdateMeteoriteLandingResponse();
+        response.setMeteoriteLanding(soapMeteoriteLandingTO);
 
         return response;
     }

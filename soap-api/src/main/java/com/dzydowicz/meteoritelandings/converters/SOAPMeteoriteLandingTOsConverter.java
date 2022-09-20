@@ -2,8 +2,10 @@ package com.dzydowicz.meteoritelandings.converters;
 
 import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationTO;
+import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingUpdateTO;
 import com.dzydowicz.meteoritelandings.tos.SOAPMeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.tos.request.create.SOAPMeteoriteLandingCreationRequestTO;
+import com.dzydowicz.meteoritelandings.tos.request.update.SOAPMeteoriteLandingUpdateRequestTO;
 
 public class SOAPMeteoriteLandingTOsConverter {
 
@@ -24,6 +26,19 @@ public class SOAPMeteoriteLandingTOsConverter {
 
     public static MeteoriteLandingCreationTO convertToMeteoriteLandingCreationTO(SOAPMeteoriteLandingCreationRequestTO requestTO) {
         return MeteoriteLandingCreationTO.builder()
+                .name(requestTO.getName())
+                .nameType(requestTO.getNametype())
+                .classification(requestTO.getRecclass())
+                .mass(requestTO.getMass())
+                .fall(requestTO.getFall())
+                .year(requestTO.getYear())
+                .latCoordination(requestTO.getReclat())
+                .longCoordination(requestTO.getReclong())
+                .build();
+    }
+
+    public static MeteoriteLandingUpdateTO convertToMeteoriteLandingUpdateTO(SOAPMeteoriteLandingUpdateRequestTO requestTO) {
+        return MeteoriteLandingUpdateTO.builder()
                 .name(requestTO.getName())
                 .nameType(requestTO.getNametype())
                 .classification(requestTO.getRecclass())

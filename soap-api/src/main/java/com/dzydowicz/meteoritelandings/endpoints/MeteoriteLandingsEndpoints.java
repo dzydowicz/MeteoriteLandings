@@ -9,11 +9,13 @@ import com.dzydowicz.meteoritelandings.tos.SOAPMeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.tos.request.GetMeteoriteLandingRequest;
 import com.dzydowicz.meteoritelandings.tos.request.create.CreateMeteoriteLandingsRequest;
 import com.dzydowicz.meteoritelandings.tos.request.create.MultiCreateMeteoriteLandingRequest;
+import com.dzydowicz.meteoritelandings.tos.request.remove.RemoveMeteoriteLandingRequest;
 import com.dzydowicz.meteoritelandings.tos.request.update.SOAPMeteoriteLandingUpdateRequestTO;
 import com.dzydowicz.meteoritelandings.tos.request.update.UpdateMeteoriteLandingRequest;
-import com.dzydowicz.meteoritelandings.tos.response.create.CreateMeteoriteLandingResponse;
 import com.dzydowicz.meteoritelandings.tos.response.GetMeteoriteLandingResponse;
+import com.dzydowicz.meteoritelandings.tos.response.create.CreateMeteoriteLandingResponse;
 import com.dzydowicz.meteoritelandings.tos.response.create.MultiCreateMeteoriteLandingsResponse;
+import com.dzydowicz.meteoritelandings.tos.response.remove.RemoveMeteoriteLandingResponse;
 import com.dzydowicz.meteoritelandings.tos.response.update.UpdateMeteoriteLandingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -81,7 +83,7 @@ public class MeteoriteLandingsEndpoints {
 
     @PayloadRoot(localPart = "updateMeteoriteLandingRequest")
     @ResponsePayload
-    public UpdateMeteoriteLandingResponse updateMeteoriteLandingResponse(@RequestPayload UpdateMeteoriteLandingRequest request) {
+    public UpdateMeteoriteLandingResponse updateMeteoriteLanding(@RequestPayload UpdateMeteoriteLandingRequest request) {
 
         SOAPMeteoriteLandingUpdateRequestTO soapMeteoriteLandingUpdateTO = request.getMeteoriteLanding();
         Integer id = soapMeteoriteLandingUpdateTO.getId();
@@ -93,6 +95,17 @@ public class MeteoriteLandingsEndpoints {
 
         UpdateMeteoriteLandingResponse response = new UpdateMeteoriteLandingResponse();
         response.setMeteoriteLanding(soapMeteoriteLandingTO);
+
+        return response;
+    }
+
+    @PayloadRoot(localPart = "removeMeteoriteLandingRequest")
+    public RemoveMeteoriteLandingResponse removeMeteoriteLanding(@RequestPayload RemoveMeteoriteLandingRequest request) {
+
+        meteoriteLandingsService.removeMeteoriteLanding(request.getId());
+
+        RemoveMeteoriteLandingResponse response = new RemoveMeteoriteLandingResponse();
+        response.setResponse("Meteorite landing with id " + request.getId() + "correctly removed.");
 
         return response;
     }

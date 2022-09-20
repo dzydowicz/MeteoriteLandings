@@ -2,34 +2,36 @@ package com.dzydowicz.meteoritelandings.models;
 
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingFallEnum;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingNameTypeEnum;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Document(collection = "MeteoriteLandings")
 public class MeteoriteLandingTO {
 
-    @Id
+    @MongoId
     private int id;
     private String name;
-
-    @JsonProperty("nametype")
     private MeteoriteLandingNameTypeEnum nameType;
 
-    @JsonProperty("recclass")
+    @Field("recclass")
     private String classification;
 
-    private float mass;
+    private Float mass;
     private MeteoriteLandingFallEnum fall;
-    private int year;
+    private Integer year;
 
-    @JsonProperty("reclat")
-    private float latCoordination;
+    @Field("reclat")
+    private Float latCoordination;
 
-    @JsonProperty("reclong")
-    private float longCoordination;
+    @Field("reclong")
+    private Float longCoordination;
 
     private String geoLocation;
 }

@@ -1,7 +1,9 @@
 package com.dzydowicz.meteoritelandings.endpoints;
 
+import com.dzydowicz.meteoritelandings.converters.SOAPMeteoriteLandingTOConverter;
 import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.services.MeteoriteLandingsService;
+import com.dzydowicz.meteoritelandings.tos.SOAPMeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.tos.request.GetMeteoriteLandingRequest;
 import com.dzydowicz.meteoritelandings.tos.response.GetMeteoriteLandingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,12 @@ public class MeteoriteLandingsEndpoints {
 
     @PayloadRoot(localPart = "getMeteoriteLandingRequest")
     @ResponsePayload
-    public GetMeteoriteLandingResponse getMeteoriteLanding(@RequestPayload GetMeteoriteLandingRequest request)
-    {
-        MeteoriteLandingTO meteoriteLanding = meteoriteLandingsService.findMeteoriteLanding(request.getId());
+    public GetMeteoriteLandingResponse getMeteoriteLanding(@RequestPayload GetMeteoriteLandingRequest request) {
+        MeteoriteLandingTO meteoriteLandingTO = meteoriteLandingsService.findMeteoriteLanding(request.getId());
+        SOAPMeteoriteLandingTO soapMeteoriteLandingTO = SOAPMeteoriteLandingTOConverter.convertToSOAPMeteoriteLandingTO(meteoriteLandingTO);
 
         GetMeteoriteLandingResponse response = new GetMeteoriteLandingResponse();
-        response.setMeteoriteLanding(meteoriteLanding);
+        response.setMeteoriteLanding(soapMeteoriteLandingTO);
 
         return response;
     }

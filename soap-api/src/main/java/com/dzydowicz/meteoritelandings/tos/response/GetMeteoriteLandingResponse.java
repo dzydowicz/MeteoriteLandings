@@ -1,6 +1,7 @@
 package com.dzydowicz.meteoritelandings.tos.response;
 
 import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
+import com.dzydowicz.meteoritelandings.tos.SOAPMeteoriteLandingTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,5 +17,5 @@ import javax.xml.bind.annotation.*;
 public class GetMeteoriteLandingResponse {
 
     @XmlElement
-    private MeteoriteLandingTO meteoriteLanding;
+    private SOAPMeteoriteLandingTO meteoriteLanding;
 }

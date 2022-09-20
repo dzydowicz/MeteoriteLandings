@@ -38,10 +38,10 @@ public class MeteoriteLandingsController {
     public ResponseEntity<List<MeteoriteLandingTO>> getMeteoriteLandings(@RequestParam(value = "ids", required = false) List<Integer> ids,
                                                          @RequestParam(value = "nameType", required = false) MeteoriteLandingNameTypeEnum nameType,
                                                          @RequestParam(value = "fall", required = false) MeteoriteLandingFallEnum fall,
-                                                         @RequestParam(value = "minMass", required = false) float minMass,
-                                                         @RequestParam(value = "maxMass", required = false) float maxMass,
-                                                         @RequestParam(value = "minYear", required = false) float minYear,
-                                                         @RequestParam(value = "maxYear", required = false) float maxYear) {
+                                                         @RequestParam(value = "minMass", required = false) Float minMass,
+                                                         @RequestParam(value = "maxMass", required = false) Float maxMass,
+                                                         @RequestParam(value = "minYear", required = false) Integer minYear,
+                                                         @RequestParam(value = "maxYear", required = false) Integer maxYear) {
         MeteoriteLandingFilterTO meteoriteLandingFilterTO = new MeteoriteLandingFilterTO(ids, nameType, fall, minMass, maxMass, minYear, maxYear);
         List<MeteoriteLandingTO> meteoriteLandingTOs = meteoriteLandingsService.getMultiMeteoriteLandings(meteoriteLandingFilterTO);
 
@@ -54,14 +54,6 @@ public class MeteoriteLandingsController {
         return new ResponseEntity<>(meteoriteLandingsService.createMeteoriteLanding(meteoriteLandingCreationTO), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MeteoriteLandingTO> updateMeteoriteLanding(@PathVariable int id, @RequestBody MeteoriteLandingCreationRequestTO requestTO) {
-        MeteoriteLandingCreationTO meteoriteLandingCreationTO = MeteoriteLandingTOsConverter.convertToMeteoriteLandingCreationTO(requestTO);
-        MeteoriteLandingTO meteoriteLandingTO = meteoriteLandingsService.updateMeteoriteLanding(id, meteoriteLandingCreationTO);
-
-        return new ResponseEntity<>(meteoriteLandingTO, HttpStatus.OK);
-    }
-
     @PostMapping("/multi-create")
     public ResponseEntity<List<MeteoriteLandingTO>> createMultiMeteoriteLandings(@RequestBody MeteoriteLandingMultiCreationRequestTO requestTO) {
         List<MeteoriteLandingCreationTO> meteoriteLandingCreationTOs = requestTO.getMeteoriteLandings().stream()
@@ -69,6 +61,14 @@ public class MeteoriteLandingsController {
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(meteoriteLandingsService.createMultipleMeteoriteLandings(meteoriteLandingCreationTOs), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MeteoriteLandingTO> updateMeteoriteLanding(@PathVariable int id, @RequestBody MeteoriteLandingCreationRequestTO requestTO) {
+        MeteoriteLandingCreationTO meteoriteLandingCreationTO = MeteoriteLandingTOsConverter.convertToMeteoriteLandingCreationTO(requestTO);
+        MeteoriteLandingTO meteoriteLandingTO = meteoriteLandingsService.updateMeteoriteLanding(id, meteoriteLandingCreationTO);
+
+        return new ResponseEntity<>(meteoriteLandingTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

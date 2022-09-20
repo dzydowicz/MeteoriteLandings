@@ -13,9 +13,9 @@ public class MeteoriteLandingCreationTO {
     private String name;
     private MeteoriteLandingNameTypeEnum nameType;
     private String classification;
-    private float mass;
+    private Float mass;
     private MeteoriteLandingFallEnum fall;
-    private int year;
-    private float latCoordination;
-    private float longCoordination;
+    private Integer year;
+    private Float latCoordination;
+    private Float longCoordination;
 }

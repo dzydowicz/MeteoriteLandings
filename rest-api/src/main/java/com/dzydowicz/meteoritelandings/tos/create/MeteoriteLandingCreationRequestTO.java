@@ -15,13 +15,13 @@ public class MeteoriteLandingCreationRequestTO {
     @JsonProperty("recclass")
     private String classification;
 
-    private float mass;
+    private Float mass;
     private MeteoriteLandingFallEnum fall;
-    private int year;
+    private Integer year;
 
     @JsonProperty("reclat")
-    private float latCoordination;
+    private Float latCoordination;
 
     @JsonProperty("reclong")
-    private float longCoordination;
+    private Float longCoordination;
 }

@@ -23,13 +23,13 @@ public class SOAPMeteoriteLandingCreationRequestTO {
     @XmlElement
     private String recclass;
     @XmlElement
-    private float mass;
+    private Float mass;
     @XmlElement
     private MeteoriteLandingFallEnum fall;
     @XmlElement
-    private int year;
+    private Integer year;
     @XmlElement
-    private float reclat;
+    private Float reclat;
     @XmlElement
-    private float reclong;
+    private Float reclong;
 }

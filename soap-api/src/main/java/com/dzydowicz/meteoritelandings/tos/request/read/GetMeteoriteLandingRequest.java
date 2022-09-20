@@ -1,4 +1,4 @@
-package com.dzydowicz.meteoritelandings.tos.request;
+package com.dzydowicz.meteoritelandings.tos.request.read;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

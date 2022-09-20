@@ -76,6 +76,6 @@ public class MeteoriteLandingsController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> removeMeteoriteLanding(@PathVariable int id) {
         meteoriteLandingsService.removeMeteoriteLanding(id);
-        return new ResponseEntity<>("Meteorite landing correctly removed.", HttpStatus.OK);
+        return new ResponseEntity<>("Meteorite landing with id " + id + "correctly removed.", HttpStatus.OK);
     }
 }

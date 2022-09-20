@@ -6,9 +6,11 @@ import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingFallEnum;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingNameTypeEnum;
 import com.dzydowicz.meteoritelandings.services.MeteoriteLandingsService;
-import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationRequestTO;
+import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingUpdateTO;
+import com.dzydowicz.meteoritelandings.tos.create.MeteoriteLandingCreationRequestTO;
 import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingFilterTO;
-import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingMultiCreationRequestTO;
+import com.dzydowicz.meteoritelandings.tos.create.MeteoriteLandingMultiCreationRequestTO;
+import com.dzydowicz.meteoritelandings.tos.update.MeteoriteLandingUpdateRequestTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -64,8 +66,8 @@ public class MeteoriteLandingsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MeteoriteLandingTO> updateMeteoriteLanding(@PathVariable int id, @RequestBody MeteoriteLandingCreationRequestTO requestTO) {
-        MeteoriteLandingCreationTO meteoriteLandingCreationTO = MeteoriteLandingTOsConverter.convertToMeteoriteLandingCreationTO(requestTO);
+    public ResponseEntity<MeteoriteLandingTO> updateMeteoriteLanding(@PathVariable int id, @RequestBody MeteoriteLandingUpdateRequestTO requestTO) {
+        MeteoriteLandingUpdateTO meteoriteLandingCreationTO = MeteoriteLandingTOsConverter.convertToMeteoriteLandingUpdateTO(requestTO);
         MeteoriteLandingTO meteoriteLandingTO = meteoriteLandingsService.updateMeteoriteLanding(id, meteoriteLandingCreationTO);
 
         return new ResponseEntity<>(meteoriteLandingTO, HttpStatus.OK);

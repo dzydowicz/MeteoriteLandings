@@ -1,4 +1,4 @@
-package com.dzydowicz.meteoritelandings.tos.response;
+package com.dzydowicz.meteoritelandings.tos.response.create;
 
 import com.dzydowicz.meteoritelandings.tos.SOAPMeteoriteLandingTO;
 import lombok.Data;

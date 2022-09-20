@@ -3,12 +3,14 @@ package com.dzydowicz.meteoritelandings.tos;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingFallEnum;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingNameTypeEnum;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class MeteoriteLandingFilterTO {
     private List<Integer> ids;
     private MeteoriteLandingNameTypeEnum nameType;

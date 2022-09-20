@@ -1,4 +1,4 @@
-package com.dzydowicz.meteoritelandings.tos;
+package com.dzydowicz.meteoritelandings.tos.create;
 
 import lombok.Data;
 import java.util.List;

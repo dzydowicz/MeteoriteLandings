@@ -1,4 +1,4 @@
-package com.dzydowicz.meteoritelandings.tos;
+package com.dzydowicz.meteoritelandings.tos.create;
 
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingFallEnum;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingNameTypeEnum;

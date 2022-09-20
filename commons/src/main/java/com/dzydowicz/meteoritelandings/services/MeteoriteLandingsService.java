@@ -5,6 +5,7 @@ import com.dzydowicz.meteoritelandings.exceptions.MeteoriteLandingNotFoundExcept
 import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationTO;
 import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingFilterTO;
+import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingUpdateTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,12 +36,12 @@ public class MeteoriteLandingsService {
                 meteoriteLandingFilterTO.getNameType());
     }
 
-    public MeteoriteLandingTO updateMeteoriteLanding(int meteoriteLandingId, MeteoriteLandingCreationTO meteoriteLandingCreationTO) throws MeteoriteLandingNotFoundException {
+    public MeteoriteLandingTO updateMeteoriteLanding(int meteoriteLandingId, MeteoriteLandingUpdateTO meteoriteLandingUpdateTO) throws MeteoriteLandingNotFoundException {
         if (!repository.existsById(meteoriteLandingId)) {
             throw new MeteoriteLandingNotFoundException("Cannot find meteorite landing with id: " + meteoriteLandingId);
         }
 
-        MeteoriteLandingTO meteoriteLandingTO = createMeteoriteLandingTO(meteoriteLandingId, meteoriteLandingCreationTO);
+        MeteoriteLandingTO meteoriteLandingTO = createMeteoriteLandingTO(meteoriteLandingId, meteoriteLandingUpdateTO);
         return repository.save(meteoriteLandingTO);
     }
 
@@ -87,5 +88,13 @@ public class MeteoriteLandingsService {
         return new MeteoriteLandingTO(meteoriteLandingId, meteoriteLandingCreationTO.getName(), meteoriteLandingCreationTO.getNameType(), meteoriteLandingCreationTO.getClassification(),
                 meteoriteLandingCreationTO.getMass(), meteoriteLandingCreationTO.getFall(), meteoriteLandingCreationTO.getYear(),
                 meteoriteLandingCreationTO.getLatCoordination(), meteoriteLandingCreationTO.getLongCoordination(), geoLocation);
+    }
+
+    private MeteoriteLandingTO createMeteoriteLandingTO(int meteoriteLandingId, MeteoriteLandingUpdateTO meteoriteLandingUpdateTO) {
+        String geoLocation = String.format("(%f, %f)", meteoriteLandingUpdateTO.getLatCoordination(), meteoriteLandingUpdateTO.getLongCoordination());
+
+        return new MeteoriteLandingTO(meteoriteLandingId, meteoriteLandingUpdateTO.getName(), meteoriteLandingUpdateTO.getNameType(), meteoriteLandingUpdateTO.getClassification(),
+                meteoriteLandingUpdateTO.getMass(), meteoriteLandingUpdateTO.getFall(), meteoriteLandingUpdateTO.getYear(),
+                meteoriteLandingUpdateTO.getLatCoordination(), meteoriteLandingUpdateTO.getLongCoordination(), geoLocation);
     }
 }

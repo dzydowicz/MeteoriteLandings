@@ -55,18 +55,18 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="multiCreateMeteoriteLandingRequest">
+    <xs:element name="multiCreateMeteoriteLandingsRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="createMeteoriteLanding" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element name="meteoriteLanding" type="tns:createMeteoriteLanding" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="multiCreateMeteoriteLandingResponse">
+    <xs:element name="multiCreateMeteoriteLandingsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="meteoriteLanding" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="meteoriteLanding" type="tns:meteoriteLanding" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

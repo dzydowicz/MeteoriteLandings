@@ -10,10 +10,10 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "", propOrder = {
         "meteoriteLanding"
 })
-@XmlRootElement(name = "getMeteoriteLandingResponse")
+@XmlRootElement(name = "createMeteoriteLandingResponse")
 @Data
 @NoArgsConstructor
-public class GetMeteoriteLandingResponse {
+public class CreateMeteoriteLandingResponse {
 
     @XmlElement
     private SOAPMeteoriteLandingTO meteoriteLanding;

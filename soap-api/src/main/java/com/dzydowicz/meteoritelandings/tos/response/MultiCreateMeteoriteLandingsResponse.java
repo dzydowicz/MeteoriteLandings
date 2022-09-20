@@ -5,16 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.*;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "meteoriteLanding"
 })
-@XmlRootElement(name = "getMeteoriteLandingResponse")
+@XmlRootElement(name = "multiCreateMeteoriteLandingsResponse")
 @Data
 @NoArgsConstructor
-public class GetMeteoriteLandingResponse {
+public class MultiCreateMeteoriteLandingsResponse {
 
     @XmlElement
-    private SOAPMeteoriteLandingTO meteoriteLanding;
+    private List<SOAPMeteoriteLandingTO> meteoriteLanding;
 }

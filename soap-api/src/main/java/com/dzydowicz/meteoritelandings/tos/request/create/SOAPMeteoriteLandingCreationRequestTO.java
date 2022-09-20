@@ -1,9 +1,7 @@
-package com.dzydowicz.meteoritelandings.tos;
+package com.dzydowicz.meteoritelandings.tos.request.create;
 
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingFallEnum;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingNameTypeEnum;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,35 +9,27 @@ import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "id", "name", "nametype", "recclass", "mass", "fall", "year", "reclat", "reclong", "geoLocation"
+        "name", "nametype", "recclass", "mass", "fall", "year", "reclat", "reclong"
 })
 @XmlRootElement(name = "meteoriteLanding")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class SOAPMeteoriteLandingTO {
-
-    @XmlElement(required = true)
-    private int id;
+public class SOAPMeteoriteLandingCreationRequestTO {
 
     @XmlElement(required = true)
     private String name;
-
     @XmlElement
     private MeteoriteLandingNameTypeEnum nametype;
     @XmlElement
     private String recclass;
     @XmlElement
-    private Float mass;
+    private float mass;
     @XmlElement
     private MeteoriteLandingFallEnum fall;
     @XmlElement
-    private Integer year;
+    private int year;
     @XmlElement
-    private Float reclat;
+    private float reclat;
     @XmlElement
-    private Float reclong;
-    @XmlElement
-    private String geoLocation;
+    private float reclong;
 }

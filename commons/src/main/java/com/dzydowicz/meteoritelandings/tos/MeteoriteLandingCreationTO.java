@@ -3,10 +3,12 @@ package com.dzydowicz.meteoritelandings.tos;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingFallEnum;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingNameTypeEnum;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class MeteoriteLandingCreationTO {
     private String name;
     private MeteoriteLandingNameTypeEnum nameType;

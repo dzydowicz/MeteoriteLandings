@@ -1,0 +1,155 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="namespace"
+           targetNamespace="namespace" elementFormDefault="qualified">
+
+    <xs:element name="getMeteoriteLandingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMeteoriteLandingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meteoriteLanding" type="tns:meteoriteLanding"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMeteoriteLandingsFilteredRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ids" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                <xs:element name="nametype" type="tns:meteoriteLandingNameTypeEnum" nillable="true"/>
+                <xs:element name="fall" type="tns:meteoriteLandingFallEnum"/>
+                <xs:element name="minMass" type="xs:float"/>
+                <xs:element name="maxMass" type="xs:float"/>
+                <xs:element name="minYear" type="xs:int"/>
+                <xs:element name="maxYear" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMeteoriteLandingsFilteredResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meteoriteLanding" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createMeteoriteLandingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meteoriteLanding" type="tns:createMeteoriteLanding"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createMeteoriteLandingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meteoriteLanding" type="tns:meteoriteLanding"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="multiCreateMeteoriteLandingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="createMeteoriteLanding" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="multiCreateMeteoriteLandingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meteoriteLanding" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateMeteoriteLandingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="nametype" type="tns:meteoriteLandingNameTypeEnum"/>
+                <xs:element name="recclass" type="xs:string"/>
+                <xs:element name="mass" type="xs:float"/>
+                <xs:element name="fall" type="tns:meteoriteLandingFallEnum"/>
+                <xs:element name="year" type="xs:int"/>
+                <xs:element name="reclat" type="xs:float"/>
+                <xs:element name="reclong" type="xs:float"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateMeteoriteLandingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="meteoriteLanding" type="tns:meteoriteLanding"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="removeMeteoriteLandingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="removeMeteoriteLandingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="meteoriteLanding">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="nametype" type="tns:meteoriteLandingNameTypeEnum"/>
+            <xs:element name="recclass" type="xs:string"/>
+            <xs:element name="mass" type="xs:float"/>
+            <xs:element name="fall" type="tns:meteoriteLandingFallEnum"/>
+            <xs:element name="year" type="xs:int"/>
+            <xs:element name="reclat" type="xs:float"/>
+            <xs:element name="reclong" type="xs:float"/>
+            <xs:element name="geoLocation" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="createMeteoriteLanding">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="nametype" type="tns:meteoriteLandingNameTypeEnum"/>
+            <xs:element name="recclass" type="xs:string"/>
+            <xs:element name="mass" type="xs:float"/>
+            <xs:element name="fall" type="tns:meteoriteLandingFallEnum"/>
+            <xs:element name="year" type="xs:int"/>
+            <xs:element name="reclat" type="xs:float"/>
+            <xs:element name="reclong" type="xs:float"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="meteoriteLandingNameTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="RELICT"/>
+            <xs:enumeration value="VALID"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="meteoriteLandingFallEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FELL"/>
+            <xs:enumeration value="FOUND"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

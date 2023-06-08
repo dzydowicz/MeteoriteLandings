@@ -1,17 +1,17 @@
 package com.dzydowicz.meteoritelandings.controller;
 
 import com.dzydowicz.meteoritelandings.converters.MeteoriteLandingTOsConverter;
-import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationTO;
+import com.dzydowicz.meteoritelandings.db.repository.MeteoriteLandingsService;
 import com.dzydowicz.meteoritelandings.models.MeteoriteLandingTO;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingFallEnum;
 import com.dzydowicz.meteoritelandings.models.enums.MeteoriteLandingNameTypeEnum;
-import com.dzydowicz.meteoritelandings.services.MeteoriteLandingsService;
+import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingCreationTO;
+import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingFilterTO;
 import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingUpdateTO;
 import com.dzydowicz.meteoritelandings.tos.create.MeteoriteLandingCreationRequestTO;
-import com.dzydowicz.meteoritelandings.tos.MeteoriteLandingFilterTO;
 import com.dzydowicz.meteoritelandings.tos.create.MeteoriteLandingMultiCreationRequestTO;
 import com.dzydowicz.meteoritelandings.tos.update.MeteoriteLandingUpdateRequestTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +22,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/meteorite-landings", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequiredArgsConstructor
 public class MeteoriteLandingsController {
     private final MeteoriteLandingsService meteoriteLandingsService;
-
-    @Autowired
-    public MeteoriteLandingsController(MeteoriteLandingsService meteoriteLandingsService) {
-        this.meteoriteLandingsService = meteoriteLandingsService;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<MeteoriteLandingTO> getMeteoriteLanding(@PathVariable int id) {
@@ -45,7 +41,7 @@ public class MeteoriteLandingsController {
                                                          @RequestParam(value = "minYear", required = false) Integer minYear,
                                                          @RequestParam(value = "maxYear", required = false) Integer maxYear) {
         MeteoriteLandingFilterTO meteoriteLandingFilterTO = new MeteoriteLandingFilterTO(ids, nameType, fall, minMass, maxMass, minYear, maxYear);
-        List<MeteoriteLandingTO> meteoriteLandingTOs = meteoriteLandingsService.getMultiMeteoriteLandings(meteoriteLandingFilterTO);
+        List<MeteoriteLandingTO> meteoriteLandingTOs = meteoriteLandingsService.getFilteredMeteoriteLandings(meteoriteLandingFilterTO);
 
         return new ResponseEntity<>(meteoriteLandingTOs, HttpStatus.OK);
     }

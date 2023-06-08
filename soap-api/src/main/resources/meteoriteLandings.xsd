@@ -20,13 +20,7 @@
     <xs:element name="getMeteoriteLandingsFilteredRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="ids" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
-                <xs:element name="nametype" type="tns:meteoriteLandingNameTypeEnum" nillable="true"/>
-                <xs:element name="fall" type="tns:meteoriteLandingFallEnum"/>
-                <xs:element name="minMass" type="xs:float"/>
-                <xs:element name="maxMass" type="xs:float"/>
-                <xs:element name="minYear" type="xs:int"/>
-                <xs:element name="maxYear" type="xs:int"/>
+                <xs:element name="meteoriteLandingsFilter" type="tns:meteoriteLandingsFilter"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -102,6 +96,22 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:complexType name="meteoriteLandingsFilter">
+        <xs:sequence>
+            <xs:element name="ids" type="tns:ids" nillable="true"/>
+            <xs:element name="nametype" type="tns:meteoriteLandingNameTypeEnum" nillable="true"/>
+            <xs:element name="fall" type="tns:meteoriteLandingFallEnum" nillable="true"/>
+            <xs:element name="minMass" type="xs:float" nillable="true"/>
+            <xs:element name="maxMass" type="xs:float" nillable="true"/>
+            <xs:element name="minYear" type="xs:int" nillable="true"/>
+            <xs:element name="maxYear" type="xs:int" nillable="true"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ids">
+        <xs:list itemType="xs:int" />
+    </xs:simpleType>
 
     <xs:complexType name="meteoriteLanding">
         <xs:sequence>
